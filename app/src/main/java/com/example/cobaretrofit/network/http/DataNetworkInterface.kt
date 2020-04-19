@@ -5,6 +5,5 @@ import com.example.cobaretrofit.network.response.Data
 
 interface DataNetworkInterface {
     val downloadData : LiveData<Data>
-
     suspend fun fetchData()
 }

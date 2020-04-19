@@ -10,7 +10,6 @@ import com.example.cobaretrofit.adapter.DataAdapter
 import com.example.cobaretrofit.network.http.ApiServices
 import com.example.cobaretrofit.network.http.ConnectivityInterceptorImpl
 import com.example.cobaretrofit.network.http.DataNetworkInterfaceImpl
-import com.example.cobaretrofit.network.response.Data
 import com.example.cobaretrofit.network.response.DataItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
@@ -22,11 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        stateLoading(false)
+        getDataItem()
+    }
 
+    fun getDataItem(){
         // Call ApiService
         val apiServices = ApiServices(ConnectivityInterceptorImpl(this))
         val dataNetworkInterfaceImpl = DataNetworkInterfaceImpl(apiServices)
-        stateLoading(false)
         dataNetworkInterfaceImpl.downloadData.observe(this, Observer { data ->
             // State Loading
             stateLoading(true)
